@@ -1,9 +1,28 @@
+import React from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
+import { useFruit } from '../providers/list/fruit-provider'
+
 const Home: NextPage = () => {
+  const { fruit, setFruit } = useFruit()
+  
+  const onClick = () => {
+    const _fruit = {
+      fruit: {
+        name: '',
+        ids: ['abc'],
+        fruit: {
+          'abc': {
+            age: 27,
+            name: 'ohoshi'
+          }
+        }
+      }
+    }
+    setFruit(_fruit)
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -13,14 +32,11 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <p className={styles.description}>
-          Operation immer useReducer
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-        <p>
-          Use immer with <code className={styles.code}>useReducer</code>
-        </p>
-        <a href="https://github.com/immerjs/use-immer" className={styles.anchor}>https://github.com/immerjs/use-immer</a>
+        current fruit
+        <div className={styles.code}>
+          {JSON.stringify(fruit)}
+        </div>
+        <button onClick={onClick}>click</button>
       </main>
     </div>
   )
